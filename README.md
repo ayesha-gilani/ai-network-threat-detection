@@ -46,24 +46,25 @@ The system features an enterprise-grade multi-VM testbed capable of performing b
   A historical triage log containing the high-severity threat events flagged during the batch training cycle.
 * **ai_anomalies.json**  
   The real-time, live data file generated in `/var/log/suricata/` that bridges the Python script's predictions directly into the Wazuh collector framework.
+  
+## 🔹 Models & Encoders
 
-### 🔹 Models & Encoders
-* **isolation_forest_model.pkl**  
-  The pre-trained binary file containing the machine learning algorithm's tree splits.
-* **le_source.pkl**  
-  Label encoder used to translate alphanumeric source IP characters into clean numerical weights.
-* **le_signature.pkl**  
-  Label encoder used to index text-based alert strings into unique feature IDs.
-
+- **isolation_forest_model.pkl**  
+  Pre-trained Isolation Forest model used for anomaly detection in network traffic.
+- **le_source.pkl**  
+  Label encoder that converts source-related categorical values into numeric form.
+- **le_signature.pkl**  
+  Label encoder that converts Suricata alert signatures into numeric values for ML processing.
+  
 ### 🔹 Machine Learning Anomaly Map
 * **ai_detection_boundary.png**  
   A scatter plot showing how the Isolation Forest partitions normal events from structural threats:
   * **Normal Blue Clusters:** Dense, repetitive connection clusters (such as system updates) requiring deep tree splits to resolve.
   * **Anomalous Red Points:** Statistical outliers (such as hostile SQL Injections, port scans, and executable file downloads over high ephemeral destination ports) isolated quickly at shallow tree depths.
 
-![AI Detection Boundary](ai_detection_boundary.png)
-
----
+<p align="center">
+  <img src="ai_detection_boundary.png" width="600"/>
+</p>
 
 ## ⚙️ Deployment & Operational Workflow
 
